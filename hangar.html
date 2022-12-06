@@ -15,7 +15,7 @@
     <div class="wrapper">
         <aside>
             <header>
-                <img src="./media/logo.jpg" alt="logo" height="121px" width="332px">
+                <a href="./index.html"><img id="logo_img" src="./media/logo.jpg" alt="logo" height="121px" width="332px"></a>
                 <h1 class="logo">jetCompra</h1>
                 <p>Proyecto Final</p>
                 <p>v.2.0.1</p>
@@ -24,20 +24,17 @@
                 <ul>
                     <li>
                         <a class="boton-menu boton-volver" href="./index.html">
-                            <i class="bi bi-arrow-return-left"></i> Seguir comprando
+                            <i class="bi bi-arrow-return-left"></i>Volver al Catálogo
                         </a>
                     </li>
                     <li>
                         <a class="boton-menu boton-carrito active" href="./hangar.html">
-                            <i class="bi bi-cart-fill"></i> Hangar
-                        </a>
+                            <i class="bi bi-cart-fill"></i>Hangar</a>
                     </li>
                 </ul>
             </nav>
             <footer>
-                <p class="texto-footer">Julio J. Reyes H.</p>
-                <p class="texto-footer">Alumno Coderhouse</p>
-                <p class="texto-footer">Comisión 34080 JavaScript</p>
+                <p class="texto-footer">Julio Reyes - Comisión 34080 JS</p>
                 <a class="repo" href="https://github.com/jjrh92/proyectoFinalJS" target="_blank">Repositorio en github</a>
             </footer>
         </aside>
@@ -59,7 +56,7 @@
                             <p>Total:</p>
                             <p id="total">$3000</p>
                         </div>
-                        <button id="carrito-acciones-comprar" class="carrito-acciones-comprar">Comprar hangar ahora</button>
+                        <button id="carrito-acciones-comprar" class="carrito-acciones-comprar">PROCESAR HANGAR Y FINALIZAR COMPRA</button>
                     </div>
                 </div>
 
@@ -69,6 +66,7 @@
         </main>
     </div>
     
-    <script src="hangar.js"></script>
+    <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <script src="./js/hangar.js"></script>
 </body>
 </html>
