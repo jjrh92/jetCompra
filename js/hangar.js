@@ -145,13 +145,13 @@ let logo_img = document.getElementById ("logo_img");
 
 logo_img.onmouseenter = () => {
 
-logo_img.src = "./media/logo_.jpg"
+logo_img.src = "../media/logo_.jpg"
   
 }
   
 logo_img.onmouseleave = () => {
   
-logo_img.src = "./media/logo.jpg"
+logo_img.src = "../media/logo.jpg"
   
 }
 
