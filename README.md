@@ -1,0 +1,1 @@
+Este proyecto del curso de JS de coderhouse ha sido reinventado luego de varias semanas de estudio donde llegué a la conclusion de que mostrar un proyecto basado en operaciones matematicas simples no era lo que queria mostrar y por tanto este nuevo proyecto trata sobre un ecommerce simple sobre venta de aviones que es algo que me gusta mas.
