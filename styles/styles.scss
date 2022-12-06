@@ -287,3 +287,20 @@ footer {
   display: flex;
   flex-direction: column;
 }
+
+// Estilos de marquesina
+
+.marqueefy {
+
+  display: flex;
+  --mq-bg: black;
+  --mq-hover-bg: black;
+  --mq-border-radius: 3rem;
+  --mq-color: white;
+  --mq-padding-y: 3px;
+
+}
+
+.marquesina-contenedor {
+  background-color: black;
+}

@@ -27,7 +27,7 @@ function cargarProductosCarrito () {
             div.innerHTML = `
                 <img class="carrito-producto-imagen" src="${producto.imagen}" alt="${producto.titulo}">
                 <div class="carrito-producto-titulo">
-                    <small>Título</small>
+                    <small>Aeronave</small>
                     <h3>${producto.titulo}</h3>
                 </div>
                 <div class="carrito-producto-cantidad">
@@ -53,6 +53,14 @@ function cargarProductosCarrito () {
         contenedorCarritoProductos.classList.add ("disabled");
         contenedorCarritoAcciones.classList.add ("disabled");
         contenedorCarritoComprado.classList.add ("disabled");
+
+        Swal.fire({
+            position: 'center',
+            icon: 'info',
+            title: 'Tu hangar esta vacio, puedes volver al catalogo si deseas.',
+            showConfirmButton: false,
+            timer: 2500
+          })
     }
 
     actualizarBotonesEliminar ();
@@ -146,3 +154,20 @@ logo_img.onmouseleave = () => {
 logo_img.src = "./media/logo.jpg"
   
 }
+
+// Iniciar Marquesina
+
+const marqueefyList = Array.prototype.slice.call (document.querySelectorAll ('.marqueefy'));
+
+const marqueefyInstances = marqueefyList.map (m => {
+
+  return new marqueefy.Marqueefy(m, {direction: 'left', speed: 77})
+
+});
+
+// Cosas de Luxon para agregar a la marquesina
+
+const DateTime = luxon.DateTime;
+const dt = DateTime.now();
+const texto_marquesina = document.getElementById ("texto_marquesina");
+texto_marquesina.innerText = "Bienvenid@ a JetCompra, hoy es " +dt.setLocale('es').toLocaleString(DateTime.DATE_FULL)+".";

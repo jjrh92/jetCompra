@@ -218,12 +218,21 @@ function agregarAlCarrito (e) {
 
     localStorage.setItem ("productos-en-carrito", JSON.stringify (productosEnCarrito));
 
-    Swal.fire({
-        position: 'center',
-        icon: 'success',
-        title: 'Enviado al hangar',
+    const Toast = Swal.mixin({
+        toast: true,
+        position: 'top-end',
         showConfirmButton: false,
-        timer: 700
+        timer: 1000,
+        timerProgressBar: true,
+        didOpen: (toast) => {
+          toast.addEventListener('mouseenter', Swal.stopTimer)
+          toast.addEventListener('mouseleave', Swal.resumeTimer)
+        }
+      })
+      
+      Toast.fire({
+        icon: 'success',
+        title: 'Enviado al hangar'
       })
 }
 
@@ -248,6 +257,22 @@ logo_img.src = "./media/logo.jpg"
   
 }
 
+// Iniciar Marquesina
+
+const marqueefyList = Array.prototype.slice.call (document.querySelectorAll ('.marqueefy'));
+
+const marqueefyInstances = marqueefyList.map (m => {
+
+  return new marqueefy.Marqueefy(m, {direction: 'left', speed: 77})
+
+});
+
+// Cosas de Luxon para agregar a la marquesina
+
+const DateTime = luxon.DateTime;
+const dt = DateTime.now();
+const texto_marquesina = document.getElementById ("texto_marquesina");
+texto_marquesina.innerText = "Bienvenid@ a JetCompra, hoy es " +dt.setLocale('es').toLocaleString(DateTime.DATE_FULL)+".";
 
 
 // Fin
