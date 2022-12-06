@@ -263,7 +263,7 @@ const marqueefyList = Array.prototype.slice.call (document.querySelectorAll ('.m
 
 const marqueefyInstances = marqueefyList.map (m => {
 
-  return new marqueefy.Marqueefy(m, {direction: 'left', speed: 77})
+  return new marqueefy.Marqueefy(m, {direction: 'left', speed: 60})
 
 });
 
