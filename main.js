@@ -173,9 +173,9 @@ function cargarProductos (productosElegidos) {
       
     async function llamarAsync () {
 
-    console.log('Cargando catalogo');
-    const result = await luegoDe2Segundos();
-    console.log(result);
+    console.log ('Cargando catalogo');
+    const result = await luegoDe2Segundos ();
+    console.log (result);
 
     }
       
@@ -281,7 +281,7 @@ logo_img.src = "./media/logo.jpg"
   
 }
 
-// Iniciar Marquesina
+// Iniciar Marquesina con la libreria marqueefy y agregamos datos de libreria y api.
 
 const marqueefyList = Array.prototype.slice.call (document.querySelectorAll ('.marqueefy'));
 
@@ -291,11 +291,29 @@ const marqueefyInstances = marqueefyList.map (m => {
 
 });
 
-// Cosas de Luxon para agregar a la marquesina
+// Seccion de Luxon
 
 const DateTime = luxon.DateTime;
 const dt = DateTime.now();
 const texto_marquesina = document.getElementById ("texto_marquesina");
+
+// Seccion de WeatherAPI para mostrar informacion externa en nuestro sitio
+
+const options = {
+	method: 'GET',
+	headers: {
+		'X-RapidAPI-Key': '50a1055ce9msh3e4c161c1e868a1p12e824jsn4becf68ba32c',
+		'X-RapidAPI-Host': 'weatherapi-com.p.rapidapi.com'
+	}
+};
+
+fetch('https://weatherapi-com.p.rapidapi.com/forecast.json?q=BUENOS%20AIRES&days=1&lang=ES&dt=2022-12-09', options)
+	.then(response => response.json())
+	.then(response => console.log(response))
+	.catch(err => console.error(err));
+
+// Texto final de marquesina
+
 texto_marquesina.innerText = "Bienvenid@ a JetCompra, hoy es " +dt.setLocale('es').toLocaleString(DateTime.DATE_FULL)+".";
 
 
