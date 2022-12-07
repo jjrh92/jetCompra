@@ -9,6 +9,10 @@ const botonVaciar = document.querySelector ("#carrito-acciones-vaciar");
 const contenedorTotal = document.querySelector ("#total");
 const botonComprar = document.querySelector ("#carrito-acciones-comprar");
 
+// Listeners
+botonVaciar.addEventListener ("click", vaciarCarrito);
+botonComprar.addEventListener ("click", comprarCarrito);
+
 
 function cargarProductosCarrito () {
     if (productosEnCarrito && productosEnCarrito.length > 0) {
@@ -96,7 +100,6 @@ function eliminarDelCarrito (e) {
 
 }
 
-botonVaciar.addEventListener ("click", vaciarCarrito);
 function vaciarCarrito() {
     productosEnCarrito.length = 0;
     localStorage.setItem ("productos-en-carrito", JSON.stringify (productosEnCarrito));
@@ -110,13 +113,11 @@ function vaciarCarrito() {
       })
 }
 
-
 function actualizarTotal () {
     const totalCalculado = productosEnCarrito.reduce((acc, producto) => acc + (producto.precio * producto.cantidad), 0);
     total.innerText = `$${totalCalculado}`;
 }
 
-botonComprar.addEventListener ("click", comprarCarrito);
 function comprarCarrito () {
 
     productosEnCarrito.length = 0;
@@ -128,13 +129,11 @@ function comprarCarrito () {
     contenedorCarritoComprado.classList.remove ("disabled");
 
     Swal.fire ({
-    
         icon: 'success',
         title: 'Se ha realizado la compra.',
         text: 'Felices vuelos.',
         allowOutsideClick: false,
         allowEnterKey: true,
-        
       });
 
 }
@@ -144,15 +143,11 @@ function comprarCarrito () {
 let logo_img = document.getElementById ("logo_img");
 
 logo_img.onmouseenter = () => {
-
-logo_img.src = "../media/logo_.jpg"
-  
+    logo_img.src = "../media/logo_.jpg"
 }
-  
+
 logo_img.onmouseleave = () => {
-  
-logo_img.src = "../media/logo.jpg"
-  
+    logo_img.src = "../media/logo.jpg"
 }
 
 // Iniciar Marquesina con la libreria marqueefy y agregamos datos de libreria y api.

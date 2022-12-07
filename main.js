@@ -1,134 +1,5 @@
 // Inicio
 
-// AVIONES
-
-const productos = [
-    // Civiles
-    {
-        id: "civ-01",
-        titulo: "Gulfstream 5",
-        imagen: "./media/civ/01.jpg",
-        categoria: {
-            nombre: "Civiles",
-            id: "civiles",
-        },
-        precio: 5000
-    },
-    {
-        id: "civ-02",
-        titulo: "HA-420 HondaJet",
-        imagen: "./media/civ/02.jpg",
-        categoria: {
-            nombre: "Civiles",
-            id: "civiles",
-        },
-        precio: 3700
-    },
-    {
-        id: "civ-03",
-        titulo: "Boeing Business Jet",
-        imagen: "./media/civ/03.jpg",
-        categoria: {
-            nombre: "Civiles",
-            id: "civiles",
-        },
-        precio: 7700
-    },
-    {
-        id: "civ-04",
-        titulo: "Embraer Phenom 300",
-        imagen: "./media/civ/04.jpg",
-        categoria: {
-            nombre: "Civiles",
-            id: "civiles",
-        },
-        precio: 5300
-    },
-
-    // Militares
-    {
-        id: "mil-01",
-        titulo: "Dassault Mirage 2000",
-        imagen: "./media/mil/01.jpg",
-        categoria: {
-            nombre: "Militares",
-            id: "militares",
-        },
-        precio: 9100
-    },
-    {
-        id: "mil-02",
-        titulo: "F-16 Block 15 OCU",
-        imagen: "./media/mil/02.jpg",
-        categoria: {
-            nombre: "Militares",
-            id: "militares",
-        },
-        precio: 14000
-    },
-    {
-        id: "mil-03",
-        titulo: "IA-58 PUCARÁ",
-        imagen: "./media/mil/03.jpg",
-        categoria: {
-            nombre: "Militares",
-            id: "militares",
-        },
-        precio: 8900
-    },
-    {
-        id: "mil-04",
-        titulo: "OV-10 Bronco",
-        imagen: "./media/mil/04.jpg",
-        categoria: {
-            nombre: "Militares",
-            id: "militares",
-        },
-        precio: 6500
-    },
-    // TurboHelices
-    {
-        id: "turbo-01",
-        titulo: "King Air 350",
-        imagen: "./media/turbo/01.jpg",
-        categoria: {
-            nombre: "Turbo",
-            id: "turbo",
-        },
-        precio: 4900
-    },
-    {
-        id: "turbo-02",
-        titulo: "ATR 72",
-        imagen: "./media/turbo/02.jpg",
-        categoria: {
-            nombre: "Turbo",
-            id: "turbo",
-        },
-        precio: 5600
-    },
-    {
-        id: "turbo-03",
-        titulo: "Cessna SkyCourier",
-        imagen: "./media/turbo/03.jpg",
-        categoria: {
-            nombre: "Turbo",
-            id: "turbo",
-        },
-        precio: 4100
-    },
-    {
-        id: "turbo-04",
-        titulo: "Beechcraft Denali",
-        imagen: "./media/turbo/04.jpg",
-        categoria: {
-            nombre: "Turbo",
-            id: "turbo",
-        },
-        precio: 6800
-    },
-];
-
 const contenedorProductos = document.querySelector ("#contenedor-productos");
 const botonesCategorias = document.querySelectorAll (".boton-categoria");
 const tituloPrincipal = document.querySelector ("#titulo-principal");
@@ -140,8 +11,6 @@ function cargarProductos (productosElegidos) {
     function luegoDe2Segundos () {
 
         return new Promise (resolve => {
-
-          setTimeout (() => {
 
             contenedorProductos.innerHTML = "";
 
@@ -165,7 +34,6 @@ function cargarProductos (productosElegidos) {
 
             resolve ('Carga exitosa');
 
-          }, 2000);
 
         });
 
@@ -220,7 +88,7 @@ let productosEnCarritoLS = localStorage.getItem ("productos-en-carrito");
 
 if (productosEnCarritoLS) {
     productosEnCarrito = JSON.parse (productosEnCarritoLS);
-    actualizarNumerito ();
+    actualizarContadorCarrito ();
 } else {
     productosEnCarrito = [];
 }
@@ -238,7 +106,7 @@ function agregarAlCarrito (e) {
         productosEnCarrito.push (productoAgregado);
     }
 
-    actualizarNumerito ();
+    actualizarContadorCarrito ();
 
     localStorage.setItem ("productos-en-carrito", JSON.stringify (productosEnCarrito));
 
@@ -260,7 +128,7 @@ function agregarAlCarrito (e) {
       })
 }
 
-function actualizarNumerito () {
+function actualizarContadorCarrito () {
     let nuevoNumerito = productosEnCarrito.reduce((acc, producto) => acc + producto.cantidad, 0);
     numerito.innerText = nuevoNumerito;
 }
@@ -290,41 +158,6 @@ const marqueefyInstances = marqueefyList.map (m => {
   return new marqueefy.Marqueefy(m, {direction: 'left', speed: 60})
 
 });
-
-// Seccion de Luxon
-
-const DateTime = luxon.DateTime;
-const dt = DateTime.now();
-const texto_marquesina = document.getElementById ("texto_marquesina");
-
-// Seccion de WeatherAPI para mostrar informacion externa en nuestro sitio
-
-const options = {
-	method: 'GET',
-	headers: {
-		'X-RapidAPI-Key': '50a1055ce9msh3e4c161c1e868a1p12e824jsn4becf68ba32c',
-		'X-RapidAPI-Host': 'weatherapi-com.p.rapidapi.com',
-	}
-
-};
-
-
-fetch ('https://weatherapi-com.p.rapidapi.com/current.json?q=iata%3AEZE', options)
-	.then(response => response.json())
-	.then(response => console.log(response))
-	.catch(err => console.error(err));
-
-
-
-let metarEzeiza = 0;
-
-// Texto final de marquesina
-
-texto_marquesina.innerText = "Bienvenid@ a JetCompra, hoy es " +dt.setLocale('es').toLocaleString(DateTime.DATE_FULL)+". El metar en el aeropuerto de Ezeiza es "+metarEzeiza+ ".";
-
-
-// Fin
-
 
 /*
 
