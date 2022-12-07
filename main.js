@@ -135,28 +135,52 @@ const tituloPrincipal = document.querySelector ("#titulo-principal");
 let botonesAgregar = document.querySelectorAll (".producto-agregar");
 const numerito = document.querySelector ("#numerito");
 
-
 function cargarProductos (productosElegidos) {
 
-    contenedorProductos.innerHTML = "";
+    function luegoDe2Segundos () {
 
-    productosElegidos.forEach (producto => {
+        return new Promise (resolve => {
 
-        const div = document.createElement ("div");
-        div.classList.add ("producto");
-        div.innerHTML = `
-            <img class="producto-imagen" src="${producto.imagen}" alt="${producto.titulo}">
-            <div class="producto-detalles">
-                <h3 class="producto-titulo">${producto.titulo}</h3>
-                <p class="producto-precio">$${producto.precio}</p>
-                <button class="producto-agregar" id="${producto.id}">Enviar al Hangar</button>
-            </div>
-        `;
+          setTimeout (() => {
 
-        contenedorProductos.append (div);
-    })
+            contenedorProductos.innerHTML = "";
 
-    actualizarBotonesAgregar ();
+            productosElegidos.forEach (producto => {
+        
+                const div = document.createElement ("div");
+                div.classList.add ("producto");
+                div.innerHTML = `
+                    <img class="producto-imagen" src="${producto.imagen}" alt="${producto.titulo}">
+                    <div class="producto-detalles">
+                        <h3 class="producto-titulo">${producto.titulo}</h3>
+                        <p class="producto-precio">$${producto.precio}</p>
+                        <button class="producto-agregar" id="${producto.id}">Enviar al Hangar</button>
+                    </div>
+                `;
+        
+                contenedorProductos.append (div);
+            })
+        
+            actualizarBotonesAgregar ();
+
+            resolve ('Carga exitosa');
+
+          }, 2000);
+
+        });
+
+      }
+      
+    async function llamarAsync () {
+
+    console.log('Cargando catalogo');
+    const result = await luegoDe2Segundos();
+    console.log(result);
+
+    }
+      
+    llamarAsync ();
+    
 }
 
 cargarProductos (productos);
@@ -180,6 +204,7 @@ botonesCategorias.forEach (boton => {
 
     })
 });
+
 
 function actualizarBotonesAgregar () {
     botonesAgregar = document.querySelectorAll (".producto-agregar");
@@ -279,18 +304,8 @@ texto_marquesina.innerText = "Bienvenid@ a JetCompra, hoy es " +dt.setLocale('es
 
 /*
 
-PROTIPS DE TONY EN LA ULTIMA CLASE
+PROTIPS DE TONY EN LA ULTIMA CLASE SE DEBE ENTREGAR.
 
-AJAX, JSON, PROMISES, ASINCRONIA,
-FUNCIONES DE ORDEN SUPERIOR
-ASYNC, AWAIT (CONSUMIR API)
-IMPLEMENTACION DE LIBRERIA SWEETALERT O LUXON.
-ARRAYS Y OBJETOS
-FUNCIONES CON PARAMETROS (2PTS EXTRAS)
-MANIPULAR EL DOM
-
-
-SE DEBE ENTREGAR
 Objetos y Arrays. Métodos de Arrays.
 Funciones y condicionales.
 Generación del DOM de forma dinámica. Eventos.
