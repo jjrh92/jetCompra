@@ -129,7 +129,6 @@ const productos = [
     },
 ];
 
-
 const contenedorProductos = document.querySelector ("#contenedor-productos");
 const botonesCategorias = document.querySelectorAll (".boton-categoria");
 const tituloPrincipal = document.querySelector ("#titulo-principal");
@@ -299,8 +298,5 @@ Sintaxis avanzada.
 Al menos una librería de uso relevante para el proyecto.
 Manejo de promesas con fetch. 
 Carga de datos desde un JSON local o desde una API externa.
-
-
-
 
 */
