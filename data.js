@@ -1,3 +1,5 @@
+// Inicio
+
 const productos = [
     // Civiles
     {
@@ -121,6 +123,8 @@ const productos = [
             nombre: "Turbo",
             id: "turbo",
         },
-        precio: 6800
+        precio: 6700
     },
 ];
+
+// Fin

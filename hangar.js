@@ -1,3 +1,5 @@
+// Inicio
+
 let productosEnCarrito = localStorage.getItem ("productos-en-carrito");
 productosEnCarrito = JSON.parse (productosEnCarrito);
 const contenedorCarritoVacio = document.querySelector ("#carrito-vacio");
@@ -8,6 +10,7 @@ let botonesEliminar = document.querySelectorAll (".carrito-producto-eliminar");
 const botonVaciar = document.querySelector ("#carrito-acciones-vaciar");
 const contenedorTotal = document.querySelector ("#total");
 const botonComprar = document.querySelector ("#carrito-acciones-comprar");
+let logo_img = document.getElementById ("logo_img");
 
 // Listeners
 botonVaciar.addEventListener ("click", vaciarCarrito);
@@ -50,7 +53,7 @@ function cargarProductosCarrito () {
             `;
     
             contenedorCarritoProductos.append(div);
-        })
+        });
     
     } else {
         contenedorCarritoVacio.classList.remove ("disabled");
@@ -90,13 +93,13 @@ function eliminarDelCarrito (e) {
 
     localStorage.setItem ("productos-en-carrito", JSON.stringify (productosEnCarrito));
 
-    Swal.fire({
+    Swal.fire ({
         position: 'center',
         icon: 'success',
         title: 'Se ha eliminado satisfactoriamente',
         showConfirmButton: false,
         timer: 700
-      })
+      });
 
 }
 
@@ -109,8 +112,8 @@ function vaciarCarrito() {
         icon: 'success',
         title: 'Vaciar Hangar',
         text: 'Su hangar ha sido vaciado correctamente!',
-        footer: '<a href="index.html">Volver al catálogo?</a>'
-      })
+        footer: '<a href="index.html">¿Volver al catálogo? Click aca!</a>'
+      });
 }
 
 function actualizarTotal () {
@@ -140,50 +143,18 @@ function comprarCarrito () {
 
 // Efecto de cambio de color en el logo
 
-let logo_img = document.getElementById ("logo_img");
+window.addEventListener('DOMContentLoaded', () => {
 
-logo_img.onmouseenter = () => {
-    logo_img.src = "../media/logo_.jpg"
-}
-
-logo_img.onmouseleave = () => {
-    logo_img.src = "../media/logo.jpg"
-}
-
-// Iniciar Marquesina con la libreria marqueefy y agregamos datos de libreria y api.
-
-const marqueefyList = Array.prototype.slice.call (document.querySelectorAll ('.marqueefy'));
-
-const marqueefyInstances = marqueefyList.map (m => {
-
-  return new marqueefy.Marqueefy(m, {direction: 'left', speed: 60})
+    logo_img.onmouseenter = () => {
+    logo_img.src = "./media/logo_.jpg"
+    };
+        
+    logo_img.onmouseleave = () => {
+    logo_img.src = "./media/logo.jpg"
+    };
 
 });
 
-// Seccion de Luxon
-
-const DateTime = luxon.DateTime;
-const dt = DateTime.now();
-const texto_marquesina = document.getElementById ("texto_marquesina");
-
-// Seccion de WeatherAPI para mostrar informacion externa en nuestro sitio
-
-const options = {
-	method: 'GET',
-	headers: {
-		'X-RapidAPI-Key': '50a1055ce9msh3e4c161c1e868a1p12e824jsn4becf68ba32c',
-		'X-RapidAPI-Host': 'weatherapi-com.p.rapidapi.com'
-	}
-};
-
-fetch('https://weatherapi-com.p.rapidapi.com/forecast.json?q=BUENOS%20AIRES&days=1&lang=ES&dt=2022-12-09', options)
-	.then(response => response.json())
-	.then(response => console.log(response))
-	.catch(err => console.error(err));
-
-// Texto final de marquesina
-
-texto_marquesina.innerText = "Bienvenid@ a JetCompra, hoy es " +dt.setLocale('es').toLocaleString(DateTime.DATE_FULL)+".";
 
 
 // Fin

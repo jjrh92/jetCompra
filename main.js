@@ -5,50 +5,34 @@ const botonesCategorias = document.querySelectorAll (".boton-categoria");
 const tituloPrincipal = document.querySelector ("#titulo-principal");
 let botonesAgregar = document.querySelectorAll (".producto-agregar");
 const numerito = document.querySelector ("#numerito");
+let logo_img = document.getElementById ("logo_img");
 
 function cargarProductos (productosElegidos) {
 
-    function luegoDe2Segundos () {
+    return new Promise (resolve => {
 
-        return new Promise (resolve => {
+        contenedorProductos.innerHTML = "";
 
-            contenedorProductos.innerHTML = "";
-
-            productosElegidos.forEach (producto => {
+        productosElegidos.forEach (producto => {
         
-                const div = document.createElement ("div");
-                div.classList.add ("producto");
-                div.innerHTML = `
-                    <img class="producto-imagen" src="${producto.imagen}" alt="${producto.titulo}">
-                    <div class="producto-detalles">
-                        <h3 class="producto-titulo">${producto.titulo}</h3>
-                        <p class="producto-precio">$${producto.precio}</p>
-                        <button class="producto-agregar" id="${producto.id}">Enviar al Hangar</button>
-                    </div>
-                `;
+        const div = document.createElement ("div");
+        div.classList.add ("producto");
+        div.innerHTML = `
+        <img class="producto-imagen" src="${producto.imagen}" alt="${producto.titulo}">
+        <div class="producto-detalles">
+        <h3 class="producto-titulo">${producto.titulo}</h3>
+        <p class="producto-precio">$${producto.precio}</p>
+        <button class="producto-agregar" id="${producto.id}">Enviar al Hangar</button>
+        </div>
+        `;
         
-                contenedorProductos.append (div);
-            })
-        
-            actualizarBotonesAgregar ();
-
-            resolve ('Carga exitosa');
-
-
+        contenedorProductos.append (div);
         });
+        
+        actualizarBotonesAgregar ();
 
-      }
+    });
       
-    async function llamarAsync () {
-
-    console.log ('Cargando catalogo');
-    const result = await luegoDe2Segundos ();
-    console.log (result);
-
-    }
-      
-    llamarAsync ();
-    
 }
 
 cargarProductos (productos);
@@ -89,8 +73,11 @@ let productosEnCarritoLS = localStorage.getItem ("productos-en-carrito");
 if (productosEnCarritoLS) {
     productosEnCarrito = JSON.parse (productosEnCarritoLS);
     actualizarContadorCarrito ();
+
 } else {
+
     productosEnCarrito = [];
+
 }
 
 function agregarAlCarrito (e) {
@@ -117,15 +104,15 @@ function agregarAlCarrito (e) {
         timer: 1000,
         timerProgressBar: true,
         didOpen: (toast) => {
-          toast.addEventListener('mouseenter', Swal.stopTimer)
-          toast.addEventListener('mouseleave', Swal.resumeTimer)
+          toast.addEventListener ('mouseenter', Swal.stopTimer);
+          toast.addEventListener ('mouseleave', Swal.resumeTimer);
         }
-      })
+      });
       
-      Toast.fire({
+      Toast.fire ({
         icon: 'success',
         title: 'Enviado al hangar'
-      })
+      });
 }
 
 function actualizarContadorCarrito () {
@@ -135,29 +122,22 @@ function actualizarContadorCarrito () {
 
 // Efecto de cambio de color en el logo
 
-let logo_img = document.getElementById ("logo_img");
+window.addEventListener('DOMContentLoaded', () => {
 
-logo_img.onmouseenter = () => {
-
-logo_img.src = "./media/logo_.jpg"
-  
-}
-  
-logo_img.onmouseleave = () => {
-  
-logo_img.src = "./media/logo.jpg"
-  
-}
-
-// Iniciar Marquesina con la libreria marqueefy y agregamos datos de libreria y api.
-
-const marqueefyList = Array.prototype.slice.call (document.querySelectorAll ('.marqueefy'));
-
-const marqueefyInstances = marqueefyList.map (m => {
-
-  return new marqueefy.Marqueefy(m, {direction: 'left', speed: 60})
+    logo_img.onmouseenter = () => {
+    logo_img.src = "./media/logo_.jpg"
+    };
+        
+    logo_img.onmouseleave = () => {
+    logo_img.src = "./media/logo.jpg"
+    };
 
 });
+
+
+
+
+// Fin
 
 /*
 
