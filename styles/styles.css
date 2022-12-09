@@ -294,4 +294,36 @@ footer {
 
 .marquesina-contenedor {
   background-color: black;
+}
+
+html {
+  overflow: -moz-scrollbars-none;
+  scrollbar-width: none;
+}
+
+::-webkit-scrollbar {
+  display: none;
+}
+
+#progressBarContainer {
+  position: fixed;
+  z-index: 10;
+  background: black;
+}
+
+#progressBar {
+  position: absolute;
+  will-change: transform, opacity;
+  background: linear-gradient(to top, white, black);
+  transform-origin: top center;
+  transform: scale(1, 0);
+  opacity: 0;
+}
+
+#progressBarContainer,
+#progressBar {
+  top: 0;
+  right: 0;
+  bottom: 0;
+  width: 10px;
 }/*# sourceMappingURL=styles.css.map */
