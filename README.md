@@ -10,7 +10,7 @@
 <br />
 <div align="center">
   <a href="https://github.com/jjrh92/jetCompra">
-    <img src="/media/logo.jpg" alt="Logo" width="200" height="200">
+    <img src="/media/logo.jpg" alt="Logo" width="332" height="121">
   </a>
 
 <h3 align="center">Welcome - Bienvenid@</h3>
