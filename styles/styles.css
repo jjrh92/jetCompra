@@ -2,7 +2,7 @@
 :root {
   --clr-main: black;
   --clr-main-light: grey;
-  --clr-white:	#FFF5EE;
+  --clr-white: #fff5ee;
   --clr-gray: #e2e2e2;
   --clr-red: #961818;
 }
@@ -14,7 +14,17 @@
   font-family: "Roboto", sans-serif;
 }
 
-h1, h2, h3, h4, h5, h6, p, a, input, textarea, ul {
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+p,
+a,
+input,
+textarea,
+ul {
   margin: 0;
   padding: 0;
 }
@@ -326,4 +336,4 @@ html {
   right: 0;
   bottom: 0;
   width: 10px;
-}/*# sourceMappingURL=styles.css.map */
+} /*# sourceMappingURL=styles.css.map */

@@ -33,14 +33,13 @@
 About The Project <img src="https://media2.giphy.com/media/4ZrRpqbSaWoyZYRoCd/giphy.gif" width="30px"> Acerca del Proyecto
 </h1>
 
-Vanilla javascript project emulating an e-commerce selling jets. - Proyecto que emula un e-commerce de venta de jets usando javsacript vanilla.
-
+Vanilla javascript project emulating an e-commerce selling jets - Proyecto que emula un e-commerce de venta de jets usando javsacript vanilla.
 
 <h1 align="center"> 
 Built With <img src="https://media0.giphy.com/media/uhQuegHFqkVYuFMXMQ/giphy.gif" width="30px"> Hecho Con
 </h1>
 
-Bootstrap, Vanilla JS.
+Bootstrap, Vanilla JS & RapidAPI.
 
 <!-- GETTING STARTED -->
 <h1 align="center"> 
@@ -59,8 +58,7 @@ Clone the repo
 Usage <img src="https://media4.giphy.com/media/v1.Y2lkPTc5MGI3NjExN2lvcWx2Ynpia3BjYnk3Yzlvdmw1cnBjdHI3cm5uY3QzenM1enNibiZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9cw/igPDtkfSJZMFwE0LP8/giphy.gif" width="30px"> Uso
 </h1>
 
-Check this fun project about selling jets. - Chequea este divertido proyecto acerca de la venta de aviones.
-
+Jet selling ecommerce - proyecto de ecommerce de aviones.
 
 <!-- CONTRIBUTING -->
 <h1 align="center"> 

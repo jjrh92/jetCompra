@@ -1,23 +1,20 @@
 // Inicio
 
-const contenedorProductos = document.querySelector ("#contenedor-productos");
-const botonesCategorias = document.querySelectorAll (".boton-categoria");
-const tituloPrincipal = document.querySelector ("#titulo-principal");
-let botonesAgregar = document.querySelectorAll (".producto-agregar");
-const numerito = document.querySelector ("#numerito");
-let logo_img = document.getElementById ("logo_img");
+const contenedorProductos = document.querySelector("#contenedor-productos");
+const botonesCategorias = document.querySelectorAll(".boton-categoria");
+const tituloPrincipal = document.querySelector("#titulo-principal");
+let botonesAgregar = document.querySelectorAll(".producto-agregar");
+const numerito = document.querySelector("#numerito");
+let logo_img = document.getElementById("logo_img");
 
-function cargarProductos (productosElegidos) {
+function cargarProductos(productosElegidos) {
+  return new Promise((resolve) => {
+    contenedorProductos.innerHTML = "";
 
-    return new Promise (resolve => {
-
-        contenedorProductos.innerHTML = "";
-
-        productosElegidos.forEach (producto => {
-        
-        const div = document.createElement ("div");
-        div.classList.add ("producto");
-        div.innerHTML = `
+    productosElegidos.forEach((producto) => {
+      const div = document.createElement("div");
+      div.classList.add("producto");
+      div.innerHTML = `
         <img class="producto-imagen" src="${producto.imagen}" alt="${producto.titulo}">
         <div class="producto-detalles">
         <h3 class="producto-titulo">${producto.titulo}</h3>
@@ -25,113 +22,115 @@ function cargarProductos (productosElegidos) {
         <button class="producto-agregar" id="${producto.id}">Enviar al Hangar</button>
         </div>
         `;
-        
-        contenedorProductos.append (div);
-        });
-        
-        actualizarBotonesAgregar ();
 
+      contenedorProductos.append(div);
     });
-      
+
+    actualizarBotonesAgregar();
+  });
 }
 
-cargarProductos (productos);
+cargarProductos(productos);
 
-botonesCategorias.forEach (boton => {
+botonesCategorias.forEach((boton) => {
+  boton.addEventListener("click", (e) => {
+    botonesCategorias.forEach((boton) => boton.classList.remove("active"));
+    e.currentTarget.classList.add("active");
 
-    boton.addEventListener ("click", (e) => {
-
-        botonesCategorias.forEach(boton => boton.classList.remove ("active"));
-        e.currentTarget.classList.add ("active");
-
-        if (e.currentTarget.id != "todos") {
-            const productoCategoria = productos.find(producto => producto.categoria.id === e.currentTarget.id);
-            tituloPrincipal.innerText = productoCategoria.categoria.nombre;
-            const productosBoton = productos.filter(producto => producto.categoria.id === e.currentTarget.id);
-            cargarProductos(productosBoton);
-        } else {
-            tituloPrincipal.innerText = "Todas las Aeronaves";
-            cargarProductos(productos);
-        }
-
-    })
+    if (e.currentTarget.id != "todos") {
+      const productoCategoria = productos.find(
+        (producto) => producto.categoria.id === e.currentTarget.id
+      );
+      tituloPrincipal.innerText = productoCategoria.categoria.nombre;
+      const productosBoton = productos.filter(
+        (producto) => producto.categoria.id === e.currentTarget.id
+      );
+      cargarProductos(productosBoton);
+    } else {
+      tituloPrincipal.innerText = "Todas las Aeronaves";
+      cargarProductos(productos);
+    }
+  });
 });
 
+function actualizarBotonesAgregar() {
+  botonesAgregar = document.querySelectorAll(".producto-agregar");
 
-function actualizarBotonesAgregar () {
-    botonesAgregar = document.querySelectorAll (".producto-agregar");
-
-    botonesAgregar.forEach (boton => {
-        boton.addEventListener ("click", agregarAlCarrito);
-    });
+  botonesAgregar.forEach((boton) => {
+    boton.addEventListener("click", agregarAlCarrito);
+  });
 }
 
 let productosEnCarrito;
 
-let productosEnCarritoLS = localStorage.getItem ("productos-en-carrito");
+let productosEnCarritoLS = localStorage.getItem("productos-en-carrito");
 
 if (productosEnCarritoLS) {
-    productosEnCarrito = JSON.parse (productosEnCarritoLS);
-    actualizarContadorCarrito ();
-
+  productosEnCarrito = JSON.parse(productosEnCarritoLS);
+  actualizarContadorCarrito();
 } else {
-
-    productosEnCarrito = [];
-
+  productosEnCarrito = [];
 }
 
-function agregarAlCarrito (e) {
-    const idBoton = e.currentTarget.id;
-    const productoAgregado = productos.find (producto => producto.id === idBoton);
+function agregarAlCarrito(e) {
+  const idBoton = e.currentTarget.id;
+  const productoAgregado = productos.find(
+    (producto) => producto.id === idBoton
+  );
 
-    if(productosEnCarrito.some (producto => producto.id === idBoton)) {
-        const index = productosEnCarrito.findIndex(producto => producto.id === idBoton);
-        productosEnCarrito[index].cantidad++;
+  if (productosEnCarrito.some((producto) => producto.id === idBoton)) {
+    const index = productosEnCarrito.findIndex(
+      (producto) => producto.id === idBoton
+    );
+    productosEnCarrito[index].cantidad++;
+  } else {
+    productoAgregado.cantidad = 1;
+    productosEnCarrito.push(productoAgregado);
+  }
 
-    } else {
-        productoAgregado.cantidad = 1;
-        productosEnCarrito.push (productoAgregado);
-    }
+  actualizarContadorCarrito();
 
-    actualizarContadorCarrito ();
+  localStorage.setItem(
+    "productos-en-carrito",
+    JSON.stringify(productosEnCarrito)
+  );
 
-    localStorage.setItem ("productos-en-carrito", JSON.stringify (productosEnCarrito));
+  const Toast = Swal.mixin({
+    toast: true,
+    position: "top-end",
+    showConfirmButton: false,
+    timer: 1000,
+    timerProgressBar: true,
+    didOpen: (toast) => {
+      toast.addEventListener("mouseenter", Swal.stopTimer);
+      toast.addEventListener("mouseleave", Swal.resumeTimer);
+    },
+  });
 
-    const Toast = Swal.mixin({
-        toast: true,
-        position: 'top-end',
-        showConfirmButton: false,
-        timer: 1000,
-        timerProgressBar: true,
-        didOpen: (toast) => {
-          toast.addEventListener ('mouseenter', Swal.stopTimer);
-          toast.addEventListener ('mouseleave', Swal.resumeTimer);
-        }
-      });
-      
-      Toast.fire ({
-        icon: 'success',
-        title: 'Enviado al hangar'
-      });
+  Toast.fire({
+    icon: "success",
+    title: "Enviado al hangar",
+  });
 }
 
-function actualizarContadorCarrito () {
-    let nuevoNumerito = productosEnCarrito.reduce((acc, producto) => acc + producto.cantidad, 0);
-    numerito.innerText = nuevoNumerito;
+function actualizarContadorCarrito() {
+  let nuevoNumerito = productosEnCarrito.reduce(
+    (acc, producto) => acc + producto.cantidad,
+    0
+  );
+  numerito.innerText = nuevoNumerito;
 }
 
 // Efecto de cambio de color en el logo
 
-window.addEventListener('DOMContentLoaded', () => {
+window.addEventListener("DOMContentLoaded", () => {
+  logo_img.onmouseenter = () => {
+    logo_img.src = "./media/logo_.jpg";
+  };
 
-    logo_img.onmouseenter = () => {
-    logo_img.src = "./media/logo_.jpg"
-    };
-        
-    logo_img.onmouseleave = () => {
-    logo_img.src = "./media/logo.jpg"
-    };
-
+  logo_img.onmouseleave = () => {
+    logo_img.src = "./media/logo.jpg";
+  };
 });
 
 // Efectos visuales en scrollbar y en cursor
@@ -141,33 +140,38 @@ const progressBar = document.querySelector("#progressBar");
 let totalPageHeight = document.body.scrollHeight - window.innerHeight;
 let debounceResize;
 
-window.addEventListener("scroll", () => {
+window.addEventListener(
+  "scroll",
+  () => {
     let newProgressHeight = window.pageYOffset / totalPageHeight;
     progressBar.style.transform = `scale(1,${newProgressHeight})`;
     progressBar.style.opacity = `${newProgressHeight}`;
-  }, {
+  },
+  {
     capture: true,
-    passive: true
-  });
-
-  progressBarContainer.addEventListener("click", (e) => {
-    let newPageScroll = e.clientY / progressBarContainer.offsetHeight * totalPageHeight;
-    window.scrollTo({
-      top: newPageScroll,
-      behavior: 'smooth'
-    });
-  });
-
-  window.addEventListener("resize", () => {
-    clearTimeout(debounceResize);
-    debounceResize = setTimeout(() => {
-      totalPageHeight = document.body.scrollHeight - window.innerHeight;
-    }, 250);
-  });
-
-  function cambiarCursor() {
-    document.getElementById("body").style.cursor = "crosshair";
+    passive: true,
   }
+);
+
+progressBarContainer.addEventListener("click", (e) => {
+  let newPageScroll =
+    (e.clientY / progressBarContainer.offsetHeight) * totalPageHeight;
+  window.scrollTo({
+    top: newPageScroll,
+    behavior: "smooth",
+  });
+});
+
+window.addEventListener("resize", () => {
+  clearTimeout(debounceResize);
+  debounceResize = setTimeout(() => {
+    totalPageHeight = document.body.scrollHeight - window.innerHeight;
+  }, 250);
+});
+
+function cambiarCursor() {
+  document.getElementById("body").style.cursor = "crosshair";
+}
 
 // Fin
 
